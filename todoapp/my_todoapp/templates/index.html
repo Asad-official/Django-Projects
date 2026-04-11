@@ -4,54 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Asad's Task Manager</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}?v=1.1">
 </head>
 <body>
 
-    <h3>Create a New Task</h3>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add Task</button>
-    </form>
+    <header class="main-header">
+        <h1 class="brand-logo">Asad's App</h1>
+        <a href="{% url 'Logout' %}" class="logout-btn">Log Out</a>
+    </header>
 
-    <hr style="width: 100%; max-width: 900px; margin: 20px 0; border: 0; border-top: 1px solid #ccc;">
+    <div class="main-content">
+        <div class="task-form-container">
+            <h3>✨ Create New Task</h3>
+            <form method="POST" class="task-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-submit">Add Task</button>
+            </form>
+        </div>
 
-    <h3>My Tasks</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Priority</th>
-                <th>Due Date</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
+        <div class="task-grid">
             {% for task in tasks %}
-            <tr>
-                <td>{{ task.title }}</td>
-                <td>{{ task.priority }}</td>
-                <td>{{ task.due_date }}</td>
-                <td>{% if task.completed %}✅{% else %}⏳{% endif %}</td>
-                <td>
-                    <form action="{% url 'delete_task' task.id %}" method="POST" style="display:inline; box-shadow: none; padding: 0; width: auto; margin: 0;">
-                        {% csrf_token %}
-                        <button type="submit" onclick="return confirm('Delete this task?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5" style="text-align: center;">No tasks yet. Create one above!</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <div class="task-card {% if task.completed %}completed{% endif %}">
+                <div class="card-content">
+                    <span class="priority-tag {{ task.priority|lower }}">{{ task.priority }}</span>
+                    <h4>{{ task.title }}</h4>
+                    <p class="desc">{{ task.description }}</p>
+                    <p class="date">📅 {{ task.due_date }}</p>
+                </div>
 
-    <a href="{% url 'Logout' %}">Log Out</a>
+                <div class="card-actions">
+                    {% if not task.completed %}
+                    <a href="{% url 'complete_task' task.id %}" class="btn-card btn-done">Done</a>
+                    {% endif %}
+                    
+                    <form action="{% url 'delete_task' task.id %}" method="POST" class="inline-form-action">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-card btn-del" onclick="return confirm('Delete this task?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-msg">No tasks yet. Plan your day, Asad!</p>
+            {% endfor %}
+        </div>
+    </div>
 
 </body>
 </html>

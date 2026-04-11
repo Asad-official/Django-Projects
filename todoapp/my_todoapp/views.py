@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import HttpResponse,redirect
+from django.shortcuts import HttpResponse,redirect, get_object_or_404
 from .forms import RegisterForm, TaskForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -61,4 +61,10 @@ def delete_task(request,id):
     if request.method == "POST":
         task.delete()
         return redirect('home')
+@login_required
+def complete_task(request, id):
+    task = get_object_or_404(Task, id=id, user=request.user)
+    task.completed = True
+    task.save()
+    return redirect('home') # This reloads index.html with the new data
     

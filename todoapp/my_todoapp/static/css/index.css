@@ -1,113 +1,138 @@
-/* General Page Styling */
+/* Styling Reset & Colors */
+:root {
+    --primary: #2d6a4f;
+    --done-green: #40916c;
+    --delete-red: #e63946;
+    --text-dark: #1b4332;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 100%);
+    background-attachment: fixed;
     margin: 0;
+    padding-top: 100px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+}
+
+/* Header */
+.main-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 40px;
-    color: #333;
+    padding: 0 40px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    z-index: 1000;
 }
 
-h3 {
-    color: #2c3e50;
-    margin-bottom: 20px;
+.brand-logo { color: var(--primary); font-size: 1.5rem; font-weight: 800; margin: 0; }
+
+.logout-btn {
+    background: var(--delete-red);
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
 }
 
-/* Form Styling */
-form {
+/* --- FORM STYLING (FIXED) --- */
+.task-form-container {
     background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 500px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     margin-bottom: 40px;
 }
 
-form p {
+/* Targeting Django's auto-generated input fields */
+.task-form p {
     margin-bottom: 15px;
 }
 
-input, select, textarea {
+.task-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--primary);
+}
+
+.task-form input, 
+.task-form select, 
+.task-form textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-sizing: border-box; /* Ensures padding doesn't break width */
-}
-
-button {
-    cursor: pointer;
-    transition: 0.3s;
-    border: none;
-    border-radius: 6px;
-}
-
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    width: 100%;
-    font-size: 16px;
-}
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    max-width: 900px;
-    background: white;
-    border-collapse: collapse;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
     border-radius: 12px;
-    overflow: hidden; /* Rounds the table corners */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
-th {
-    background-color: #2c3e50;
-    color: white;
-    text-transform: uppercase;
     font-size: 14px;
-    letter-spacing: 1px;
+    box-sizing: border-box; /* Crucial for width */
+    transition: border-color 0.3s ease;
 }
 
-tr:hover {
-    background-color: #f9f9f9;
+.task-form input:focus {
+    border-color: var(--done-green);
+    outline: none;
 }
 
-/* Delete Button Specifics */
-td form button {
-    background-color: #ff4d4d;
+.btn-submit {
+    background: var(--primary);
     color: white;
-    padding: 6px 12px;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    width: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
-td form button:hover {
-    background-color: #cc0000;
+/* --- CARDS & BUTTONS --- */
+.task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
 }
 
-/* Logout Link */
-a[href*="Logout"] {
-    margin-top: 30px;
+.task-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    transition: transform 0.3s;
+}
+
+.task-card:hover { transform: translateY(-8px); }
+
+.card-actions { display: flex; gap: 10px; margin-top: 20px; }
+
+.btn-card {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
     text-decoration: none;
-    color: #2c3e50;
-    font-weight: bold;
-    border-bottom: 2px solid transparent;
+    font-size: 13px;
     transition: 0.3s;
 }
 
-a[href*="Logout"]:hover {
-    border-bottom: 2px solid #2c3e50;
+.btn-done { background: #d8f3dc; color: var(--done-green) !important; }
+.btn-del { background: #ffe5ec; color: var(--delete-red) !important; }
+
+/* Reset for the small forms inside the cards */
+.inline-form-action {
+    flex: 1;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
 }

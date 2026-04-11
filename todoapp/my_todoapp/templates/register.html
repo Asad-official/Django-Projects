@@ -1,27 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Join Asad's App | Register</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}?v=2.0">
 </head>
 <body>
-    <h1>This is Registration page</h1>
-   <form action="" method="POST">
-    {% csrf_token %}
 
-    {% for fields in form %}
-    <div>
-        <label for="">
-        {{fields.label}}
-    </label>
-    <input type="{{fields.fields.widget.input_type}}" name="{{fields.name}}" value="{{fields.value}}">
+    <div class="registration-card">
+        <div class="card-header">
+            <h1 class="brand-logo">Asad's App</h1>
+            <p class="subtitle">Join our community today</p>
+        </div>
+        
+        <form action="" method="POST" class="register-form">
+            {% csrf_token %}
+            
+            <div class="django-form-body">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn-signup">
+                <span>Create My Account</span>
+            </button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>Already a member? <a href="{% url 'Login' %}" class="login-link">Login Here</a></p>
+        </div>
     </div>
-    {% endfor %}
 
-    <button type="submit">Register</button>
-   </form>
-   <a href="{%url 'Login'%}">already have an account</a>
-   
 </body>
 </html>

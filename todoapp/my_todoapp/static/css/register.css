@@ -1,0 +1,152 @@
+/* login.css - Unified Emerald Theme */
+:root {
+    --primary-green: #2d6a4f;
+    --medium-green: #40916c;
+    --accent-green: #52b788;
+    --soft-green: #d8f3dc;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 100%);
+    background-attachment: fixed;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glassmorphism Card */
+.registration-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 50px 40px;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.brand-logo {
+    color: var(--primary-green);
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    color: var(--medium-green);
+    font-size: 0.9rem;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+/* Django Form Inputs */
+.django-form-body p {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.django-form-body label {
+    display: block;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.django-form-body input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e0e6ed;
+    border-radius: 15px;
+    font-size: 15px;
+    background: white;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.django-form-body input:focus {
+    border-color: var(--accent-green);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(82, 183, 136, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Beautified Sign Up Button */
+.btn-signup {
+    background: linear-gradient(to right, var(--primary-green), var(--medium-green));
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 15px;
+    width: 100%;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -5px rgba(45, 106, 79, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 15px;
+}
+
+.btn-signup:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px -5px rgba(45, 106, 79, 0.5);
+    filter: brightness(1.1);
+}
+
+.btn-signup:active {
+    transform: translateY(0);
+}
+
+/* Beautified "Login Here" Link */
+.auth-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 15px;
+    color: #556b2f;
+}
+
+.login-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: 800;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.login-link:hover {
+    color: var(--accent-green);
+    border-bottom: 2px solid var(--accent-green);
+}
+
+/* Error Handling */
+.errorlist {
+    color: #d90429;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 13px;
+    background: #fff0f3;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.helptext {
+    font-size: 11px;
+    color: #666;
+    display: block;
+    margin-top: 6px;
+    line-height: 1.4;
+}
