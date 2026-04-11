@@ -1,11 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 <body>
-    <H1>This is my home page</H1>
+
+    <h3>Create a New Task</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Task</button>
+    </form>
+
+    <hr style="width: 100%; max-width: 900px; margin: 20px 0; border: 0; border-top: 1px solid #ccc;">
+
+    <h3>My Tasks</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.priority }}</td>
+                <td>{{ task.due_date }}</td>
+                <td>{% if task.completed %}✅{% else %}⏳{% endif %}</td>
+                <td>
+                    <form action="{% url 'delete_task' task.id %}" method="POST" style="display:inline; box-shadow: none; padding: 0; width: auto; margin: 0;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Delete this task?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">No tasks yet. Create one above!</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'Logout' %}">Log Out</a>
+
 </body>
 </html>
