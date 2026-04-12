@@ -117,3 +117,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 AUTH_USER_MODEL = 'accounts.CustomUser'
+# Where to go after a successful login
+LOGIN_REDIRECT_URL = 'home' 
+
+# Where to go after logging out
+LOGOUT_REDIRECT_URL = 'login'
