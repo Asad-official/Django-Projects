@@ -3,7 +3,7 @@ from django.conf import settings
 
 # Create your models here.
 class Job(models.Model):
-    employer=models.ForeignKey(settings.AUTH_USER_MODEL,on_manager_managed=True,on_delete=models.CASCADE)
+    employer=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     title=models.CharField(max_length=255)
     description=models.TextField()
     location=models.CharField(max_length=100)
