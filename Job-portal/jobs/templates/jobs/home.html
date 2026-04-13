@@ -1,0 +1,23 @@
+<h1>Welcome, {{ user.username }}!</h1>
+
+{% if user.is_employer %}
+    <div style="border: 2px solid blue; padding: 10px;">
+        <h3>Employer Dashboard</h3>
+        <p>You are logged in as an Employer. Here you can manage your job posts.</p>
+        <button>Create New Job Post</button>
+    </div>
+{% elif user.is_employee %}
+    <div style="border: 2px solid green; padding: 10px;">
+        <h3>Job Seeker Newsfeed</h3>
+        <p>Find your next opportunity here!</p>
+        <input type="text" placeholder="Search for jobs...">
+    </div>
+{% else %}
+    <p>Please contact admin to assign a role to your account.</p>
+{% endif %}
+
+<br>
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
